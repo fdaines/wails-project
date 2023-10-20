@@ -82,4 +82,8 @@ jobs:
 
       - name: Check Build 2
         shell: bash
-        run: ls -la
+        run: ls -la /d/a/wails-project/wails-project/build
+
+      - name: Check Build 3
+        shell: bash
+        run: ls -la /d/a/wails-project/wails-project/build/bin
