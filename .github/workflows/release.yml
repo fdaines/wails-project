@@ -8,53 +8,6 @@ on:
       - "v*.*.*"
 
 jobs:
-  build-macos:
-    runs-on: macos-13
-    steps:
-      - name: Check Environment
-        run: uname -m && uname -p && arch
-
-      - name: Checkout
-        uses: actions/checkout@v3
-
-      - name: Set up Go
-        uses: actions/setup-go@v4
-        with:
-          go-version: 1.19
-
-      - name: Set up Node
-        uses: actions/setup-node@v3
-        with:
-          node-version: 16
-
-      - name: Install Wails
-        run: go install github.com/wailsapp/wails/v2/cmd/wails@latest
-
-      - name: Check Wails Version
-        run: wails version
-
-      - name: Build Project
-        run: wails build -platform=darwin/arm64
-
-      - name: Clean Application Attributes
-        run: xattr -cr /Users/runner/work/wails-project/wails-project/build/bin/wails-project.app
-
-      - name: Zip Release
-        uses: TheDoctor0/zip-release@0.7.1
-        with:
-          type: 'zip'
-          filename: "WailsProject.zip"
-          directory: /Users/runner/work/wails-project/wails-project/build/bin
-
-      - name: Check Build
-        run: ls -la /Users/runner/work/wails-project/wails-project/build/bin
-
-      - name: Save Zip File in workspace
-        uses: actions/upload-artifact@v3
-        with:
-          name: "WailsProject.zip"
-          path: "/Users/runner/work/wails-project/wails-project/build/bin/WailsProject.zip"
-
   build-linux:
     runs-on: ubuntu-latest
     steps:
@@ -73,6 +26,9 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: 16
+
+      - name: Install Ubuntu Prerequisites
+        run: sudo apt-get install -y libgtk-3-dev libwebkit2gtk-4.0-dev
 
       - name: Install Wails
         run: go install github.com/wailsapp/wails/v2/cmd/wails@latest
