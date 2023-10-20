@@ -43,7 +43,10 @@ jobs:
         run: pwd
 
       - name: Check Build 2
-        run: ls -la /Users/runner/work/wails-project/wails-project/
+        run: ls -la /home/runner/work/wails-project/wails-project
 
       - name: Check Build 3
-        run: ls -la /Users/runner/work/wails-project/wails-project/build
+        run: ls -la /home/runner/work/wails-project/wails-project/build
+
+      - name: Check Build 4
+        run: ls -la /home/runner/work/wails-project/wails-project/build/bin
