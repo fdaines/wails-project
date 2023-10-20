@@ -11,6 +11,9 @@ jobs:
   build-macos:
     runs-on: macOS-latest
     steps:
+      - name: Check Environment
+        run: uname -m && uname -p && arch
+
       - name: Checkout
         uses: actions/checkout@v3
 
@@ -23,11 +26,6 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: 16
-
-      - name: PWD Command
-        run: pwd
-      - name: LS Command
-        run: ls
 
       - name: Install Wails
         run: go install github.com/wailsapp/wails/v2/cmd/wails@latest
