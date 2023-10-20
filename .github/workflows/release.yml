@@ -67,15 +67,15 @@ jobs:
         with:
           node-version: 16
 
-#      - name: Install Wails
-#        run: go install github.com/wailsapp/wails/v2/cmd/wails@latest
-#
-#      - name: Check Wails Version
-#        run: wails version
-#
-#      - name: Build Project
-#        run: wails build -platform=windows
-#
+      - name: Install Wails
+        run: go install github.com/wailsapp/wails/v2/cmd/wails@latest
+
+      - name: Check Wails Version
+        run: wails version
+
+      - name: Build Project
+        run: wails build -platform=windows
+
       - name: Check Build 1
         shell: bash
         run: pwd
