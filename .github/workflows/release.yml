@@ -50,3 +50,31 @@ jobs:
 
       - name: Check Build 4
         run: ls -la /home/runner/work/wails-project/wails-project/build/bin
+
+  build-windows:
+    runs-on: windows-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Set up Go
+        uses: actions/setup-go@v4
+        with:
+          go-version: 1.19
+
+      - name: Set up Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16
+
+#      - name: Install Wails
+#        run: go install github.com/wailsapp/wails/v2/cmd/wails@latest
+#
+#      - name: Check Wails Version
+#        run: wails version
+#
+#      - name: Build Project
+#        run: wails build -platform=windows
+#
+      - name: Check Build 1
+        run: @echo %cd%
