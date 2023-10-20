@@ -52,4 +52,4 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: "WailsProject.zip"
-          path: "/Users/runner/work/wails-project/wails-project/build/bin/Go-Architect-version.zip"
+          path: "/Users/runner/work/wails-project/wails-project/build/bin/WailsProject.zip"
