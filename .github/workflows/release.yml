@@ -54,3 +54,37 @@ jobs:
         with:
           name: "WailsProject.zip"
           path: "/Users/runner/work/wails-project/wails-project/build/bin/WailsProject.zip"
+
+  build-linux:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check Environment
+        run: uname -m && uname -p && arch
+
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Set up Go
+        uses: actions/setup-go@v4
+        with:
+          go-version: 1.19
+
+      - name: Set up Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16
+
+      - name: Install Wails
+        run: go install github.com/wailsapp/wails/v2/cmd/wails@latest
+
+      - name: Check Wails Version
+        run: wails version
+
+      - name: Build Project
+        run: wails build -platform=darwin/arm64
+
+      - name: Check Build 1
+        run: pwd
+
+      - name: Check Build 2
+        run: ls -la /Users/runner/work/wails-project/wails-project/build/bin
