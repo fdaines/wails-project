@@ -77,4 +77,9 @@ jobs:
 #        run: wails build -platform=windows
 #
       - name: Check Build 1
-        run: cd
+        shell: bash
+        run: pwd
+
+      - name: Check Build 2
+        shell: bash
+        run: ls -la
