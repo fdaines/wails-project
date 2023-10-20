@@ -38,6 +38,9 @@ jobs:
       - name: Build Project
         run: wails build -platform=darwin/arm64
 
+      - name: Clean Application Attributes
+        run: xattr -cr /Users/runner/work/wails-project/wails-project/build/bin/wails-project.app
+
       - name: Zip Release
         uses: TheDoctor0/zip-release@0.7.1
         with:
