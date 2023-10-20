@@ -1,0 +1,55 @@
+name: Release Workflow
+
+on:
+  pull_request:
+    branches: [ main ]
+  push:
+    tags:
+      - "v*.*.*"
+
+jobs:
+  build-macos:
+    runs-on: macOS-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Set up Go
+        uses: actions/setup-go@v4
+        with:
+          go-version: 1.19
+
+      - name: Set up Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16
+
+      - name: PWD Command
+        run: pwd
+      - name: LS Command
+        run: ls
+
+      - name: Install Wails
+        run: go install github.com/wailsapp/wails/v2/cmd/wails@latest
+
+      - name: Check Wails Version
+        run: wails version
+
+      - name: Build Project
+        run: wails build -platform=darwin/arm64
+
+      - name: Zip Release
+        uses: TheDoctor0/zip-release@0.7.1
+        with:
+          type: 'zip'
+          filename: "WailsProject.zip"
+          directory: /Users/runner/work/wails-project/wails-project/build/bin
+
+      - name: Check Build
+        run: ls -la /Users/runner/work/wails-project/wails-project/build/bin
+
+      - name: Save Zip File in workspace
+        uses: actions/upload-artifact@v3
+        with:
+          name: "WailsProject.zip"
+          path: "/Users/runner/work/wails-project/wails-project/build/bin/Go-Architect-version.zip"
